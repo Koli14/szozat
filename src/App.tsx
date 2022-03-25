@@ -410,8 +410,8 @@ function App() {
         isOpen={isCreatePuzzleModalOpen}
         handleClose={() => setIsCreatePuzzleModalOpen(false)}
       />
-      <div className="transition-all">
-        <div className="flex flex-col h-[100vh] pt-2 w-[100%] max-w-[500px] mx-auto sm:px-6 lg:px-8">
+      <div className="transition-all flex justify-center items-center">
+        <div className="flex flex-col h-[100vh] pt-2 w-[100%] max-w-[500px] sm:px-6 lg:px-8">
           <div className="flex w-80 mx-auto items-center mb-2">
             <h1 className="text-xl grow font-bold dark:text-white">
               {GAME_TITLE} - {getPuzzleName()}
@@ -453,6 +453,23 @@ function App() {
               guesses={guesses}
               isRevealing={isRevealing}
             />
+          </div>
+        </div>
+        <div className="flex justify-content items-center flex-col">
+          <h1 className="text-xl grow font-bold dark:text-white">
+            Statisztikák
+          </h1>
+          <div className="flex">
+            <div>
+              <h2 className="text-m grow font-bold dark:text-white m-2">
+                Legvalószínűbb szavak
+              </h2>
+            </div>
+            <div>
+              <h2 className="text-m grow font-bold dark:text-white m-2">
+                Legsárgább szavak
+              </h2>
+            </div>
           </div>
         </div>
       </div>
