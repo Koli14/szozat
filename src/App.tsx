@@ -45,6 +45,8 @@ import { CreatePuzzleModal } from './components/modals/CreatePuzzleModal'
 import { DOUBLE_LETTERS } from './lib/hungarianWordUtils'
 import { getPuzzleName } from './lib/share'
 
+import { Algo1 } from './components/algorithms'
+
 import './App.css'
 
 function App() {
@@ -459,11 +461,12 @@ function App() {
           <h1 className="text-xl grow font-bold dark:text-white">
             Statisztikák
           </h1>
-          <div className="flex">
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <h2 className="text-m grow font-bold dark:text-white m-2">
                 Legvalószínűbb szavak
               </h2>
+              <Algo1 guesses={guesses} />
             </div>
             <div>
               <h2 className="text-m grow font-bold dark:text-white m-2">
