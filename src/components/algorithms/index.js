@@ -13,13 +13,13 @@ const AlgoContainer = ({ guesses, algo }) => {
     .filter(word => word.every(letter => charStatuses[letter] !== "absent"))  // Filter words containing absent letters
     .filter(word => {
       for (const [char, status] of Object.entries(charStatuses)) {
-        if(status === "present" && !word.includes(char) ) {
+        if (status === "present" && !word.includes(char)) {
           return false
         }
       }
       return true
       // word.some(letter => charStatuses[letter] === "present")) 
-    } // Filter words not containing present letter
+    }) // Filter words not containing present letter
   // .filter(word => word.some(letter => {})) // Filter words not having correct character at correct place
   console.log(filteredWords)
   useEffect(() => {
