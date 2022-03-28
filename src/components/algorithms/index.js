@@ -11,7 +11,17 @@ const AlgoContainer = ({ guesses, algo }) => {
   // const guesStatues = getGuessStatuses(guesses[1])
   const filteredWords = words
     .filter(word => word.every(letter => charStatuses[letter] !== "absent"))  // Filter words containing absent letters
-    .filter(word => word.some(letter => charStatuses[letter] === "present")) // Filter words not containing present letter
+    .filter(word => {
+      let shouldFilter = true
+      for (const [char, status] of Object.entries(charStatuses)) {
+        if(status === "present" ) {
+          
+        }
+        return shouldFilter
+      }
+        
+      // word.some(letter => charStatuses[letter] === "present")) 
+    } // Filter words not containing present letter
   // .filter(word => word.some(letter => {})) // Filter words not having correct character at correct place
   console.log(filteredWords)
   useEffect(() => {
