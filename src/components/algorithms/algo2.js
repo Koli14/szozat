@@ -1,15 +1,9 @@
-import { CHAR_VALUES as characters } from '../../lib/wordCommons'
-import { VALID_GUESSES as words } from '../../constants/validGuesses'
-
 /*
-* Karakter pozíciótól függetlenül pontozza a szavakat
+* Karakter poziciónként pontozza a szavakat
 */
-const algo2 = (charStatuses, words) => {
-  //console.log(charStatuses, characters, words.length)
 
-
-  return 'körte'
-
+const algo2 = (words, stats) => {
+  return 'csirke'
 }
 
 export default algo2

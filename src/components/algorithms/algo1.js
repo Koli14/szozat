@@ -1,14 +1,15 @@
-import { CHAR_VALUES } from '../../lib/wordCommons'
-import { VALID_GUESSES as words } from '../../constants/validGuesses'
-
 /*
-* Karakter poziciónként pontozza a szavakat
+* Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű csak 1szer számít
 */
-const algo1 = (charStatuses) => {
-  // console.log(charStatuses, CHAR_VALUES, words[1])
 
-  return 'alma'
-
+const algo2 = (words, stats) => {
+  const scores = words.map(word => {
+    const unique = [...new Set(word)]
+    const score = unique.reduce((partialSum, a) => partialSum + stats[a], 0)
+    return { word, score }
+  })
+  scores.sort((a, b) => b.score - a.score)
+  return scores[0].word
 }
 
-export default algo1
+export default algo2

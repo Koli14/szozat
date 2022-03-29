@@ -45,7 +45,7 @@ import { CreatePuzzleModal } from './components/modals/CreatePuzzleModal'
 import { DOUBLE_LETTERS } from './lib/hungarianWordUtils'
 import { getPuzzleName } from './lib/share'
 
-import { Algo1, Algo2 } from './components/algorithms'
+import { Algo1, Algo2, Algo3 } from './components/algorithms'
 
 import './App.css'
 
@@ -353,7 +353,6 @@ function App() {
       setShareFailed(false)
     }, ALERT_TIME_MS)
   }, [])
-
   return (
     <>
       <Alert message={NOT_ENOUGH_LETTERS_MESSAGE} isOpen={isNotEnoughLetters} />
@@ -462,17 +461,23 @@ function App() {
             Statisztikák
           </h1>
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <h2 className="text-m grow font-bold dark:text-white m-2">
-                Legvalószínűbb szavak
+            <div className="my-2 mx-4">
+              <h2 className="text-m grow font-bold dark:text-white my-2">
+                Legsárgább szó
               </h2>
               <Algo1 guesses={guesses} />
             </div>
-            <div>
-              <h2 className="text-m grow font-bold dark:text-white m-2">
-                Legsárgább szavak
-                <Algo2 guesses={guesses} />
+            <div className="my-2 mx-4">
+              <h2 className="text-m grow font-bold dark:text-white my-2">
+                Legvalószínűbb szó
               </h2>
+              <Algo2 guesses={guesses} />
+            </div>
+            <div className="my-2 mx-4">
+              <h2 className="text-m grow font-bold dark:text-white my-2">
+                Algo 3
+              </h2>
+              <Algo3 guesses={guesses} />
             </div>
           </div>
         </div>
