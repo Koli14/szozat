@@ -7,7 +7,7 @@ import algo1 from './algo1'
 import algo2 from './algo2'
 import algo3 from './algo3'
 
-const AlgoContainer = ({ guesses, algo }) => {
+const AlgoContainer = ({ guesses, algo, withPosition }) => {
   const charStatuses = getStatuses(guesses)
   const [word, setWord] = useState('')
   useEffect(() => {
@@ -38,25 +38,32 @@ const AlgoContainer = ({ guesses, algo }) => {
         })
         return shouldKeep
       }) // Filter words not having correct character at correct place, or having present letter incorrect place
-    const stats = createLetterFrequencyObject(filteredWords, CHAR_VALUES)
+    const stats = createLetterFrequencyObject(filteredWords, CHAR_VALUES, withPosition)
     setWord(algo(filteredWords, stats));
   }, [charStatuses])
   return <div className='text-sm text-gray-500 dark:text-gray-300'>{word}</div>
 }
 
-const createLetterFrequencyObject = (words, chars) => {
+const createLetterFrequencyObject = (words, chars, withPosition) => {
   const stat = {}
   chars.forEach((char) => {
-    const count = words.reduce((counter, word) => {
-      return counter + word.filter(letter => letter === char).length
-    }, 0)
+    let count;
+    if (withPosition) {
+      count = words.reduce((counter, word) => {
+        return word.map((letter, index) => letter === char ? counter[index] + 1 : counter[index])
+      }, [0, 0, 0, 0, 0])
+    } else {
+      count = words.reduce((counter, word) => {
+        return counter + word.filter(letter => letter === char).length
+      }, 0)
+    }
     stat[char] = count
   })
   return stat
 }
 
 const Algo1 = ({ guesses }) => <AlgoContainer guesses={guesses} algo={algo1} />
-const Algo2 = ({ guesses }) => <AlgoContainer guesses={guesses} algo={algo2} />
+const Algo2 = ({ guesses }) => <AlgoContainer guesses={guesses} algo={algo2} withPosition />
 const Algo3 = ({ guesses }) => <AlgoContainer guesses={guesses} algo={algo3} />
 
 export { Algo1, Algo2, Algo3 }

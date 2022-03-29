@@ -462,20 +462,29 @@ function App() {
           </h1>
           <div className="grid grid-cols-2 gap-4">
             <div className="my-2 mx-4">
-              <h2 className="text-m grow font-bold dark:text-white my-2">
+              <h2
+                className="text-m grow font-bold dark:text-white"
+                title="Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű csak 1szer számít"
+              >
                 Legsárgább szó
               </h2>
               <Algo1 guesses={guesses} />
             </div>
             <div className="my-2 mx-4">
-              <h2 className="text-m grow font-bold dark:text-white my-2">
+              <h2
+                className="text-m grow font-bold dark:text-white"
+                title="Karakter poziciónként pontozza a szavakat"
+              >
                 Legvalószínűbb szó
               </h2>
               <Algo2 guesses={guesses} />
             </div>
             <div className="my-2 mx-4">
-              <h2 className="text-m grow font-bold dark:text-white my-2">
-                Algo 3
+              <h2
+                className="text-m grow font-bold dark:text-white"
+                title="Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű 2szer számít"
+              >
+                Legbénább algoritmus
               </h2>
               <Algo3 guesses={guesses} />
             </div>
