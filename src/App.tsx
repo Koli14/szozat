@@ -445,6 +445,40 @@ function App() {
               isRevealing={isRevealing}
               currentRowClassName={currentRowClass}
             />
+            <div className="flex flex-col ml-4">
+              <h1 className="text-xl grow font-bold dark:text-white">
+                Algoritmusok
+              </h1>
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <h2
+                    className="text-m grow font-bold dark:text-white"
+                    title="Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű csak 1szer számít"
+                  >
+                    Legsárgább szó
+                  </h2>
+                  <Algo1 guesses={guesses} />
+                </div>
+                <div>
+                  <h2
+                    className="text-m grow font-bold dark:text-white"
+                    title="Karakter poziciónként pontozza a szavakat"
+                  >
+                    Legvalószínűbb szó
+                  </h2>
+                  <Algo2 guesses={guesses} />
+                </div>
+                <div>
+                  <h2
+                    className="text-m grow font-bold dark:text-white"
+                    title="Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű 2szer számít"
+                  >
+                    Legbénább algoritmus
+                  </h2>
+                  <Algo3 guesses={guesses} />
+                </div>
+              </div>
+            </div>
           </div>
           <div className="pb-2">
             <Keyboard
@@ -454,40 +488,6 @@ function App() {
               guesses={guesses}
               isRevealing={isRevealing}
             />
-          </div>
-        </div>
-        <div className="flex justify-content items-center flex-col">
-          <h1 className="text-xl grow font-bold dark:text-white">
-            Algoritmusok
-          </h1>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="my-2 mx-4">
-              <h2
-                className="text-m grow font-bold dark:text-white"
-                title="Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű csak 1szer számít"
-              >
-                Legsárgább szó
-              </h2>
-              <Algo1 guesses={guesses} />
-            </div>
-            <div className="my-2 mx-4">
-              <h2
-                className="text-m grow font-bold dark:text-white"
-                title="Karakter poziciónként pontozza a szavakat"
-              >
-                Legvalószínűbb szó
-              </h2>
-              <Algo2 guesses={guesses} />
-            </div>
-            <div className="my-2 mx-4">
-              <h2
-                className="text-m grow font-bold dark:text-white"
-                title="Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű 2szer számít"
-              >
-                Legbénább algoritmus
-              </h2>
-              <Algo3 guesses={guesses} />
-            </div>
           </div>
         </div>
       </div>
