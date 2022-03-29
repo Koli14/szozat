@@ -3,13 +3,11 @@
 */
 
 const algo2 = (words, stats) => {
-  console.log(stats)
   const scores = words.map(word => {
     const score = word.reduce((partialSum, char, index) => partialSum + stats[char][index], 0)
     return { word, score }
   })
   scores.sort((a, b) => b.score - a.score)
-  console.log(scores)
   return scores[0].word
 }
 
