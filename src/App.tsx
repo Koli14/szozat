@@ -458,7 +458,7 @@ function App() {
         </div>
         <div className="flex justify-content items-center flex-col">
           <h1 className="text-xl grow font-bold dark:text-white">
-            Statisztikák
+            Algoritmusok
           </h1>
           <div className="grid grid-cols-2 gap-4">
             <div className="my-2 mx-4">
