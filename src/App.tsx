@@ -353,6 +353,12 @@ function App() {
       setShareFailed(false)
     }, ALERT_TIME_MS)
   }, [])
+
+  const reset = () => {
+    saveGameStateToLocalStorage({ guesses: [], solution })
+    window.location.reload()
+  }
+
   return (
     <>
       <Alert message={NOT_ENOUGH_LETTERS_MESSAGE} isOpen={isNotEnoughLetters} />
@@ -478,6 +484,12 @@ function App() {
                   <Algo3 guesses={guesses} />
                 </div>
               </div>
+              <button
+                className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-16 rounded-lg flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400 my-4 p-2"
+                onClick={reset}
+              >
+                Előlről kezdem
+              </button>
             </div>
           </div>
           <div className="pb-2">
