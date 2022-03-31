@@ -1,8 +1,8 @@
 /*
-* Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű 2szer számít
-*/
+ * Karakter pozíciótól függetlenül pontozza a szavakat, kétszer szereplő betű 2szer számít
+ */
 const algo3 = (words, stats) => {
-  const scores = words.map(word => {
+  const scores = words.map((word) => {
     const score = word.reduce((partialSum, a) => partialSum + stats[a], 0)
     return { word, score }
   })

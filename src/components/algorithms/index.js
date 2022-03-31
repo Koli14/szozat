@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
-import { getStatuses, getGuessStatuses, isCharValue } from '../../lib/statuses'
+import { getStatuses, getGuessStatuses } from '../../lib/statuses'
 import { CHAR_VALUES } from '../../lib/wordCommons'
 import { VALID_GUESSES as words } from '../../constants/validGuesses'
-import { WORDS } from '../../constants/wordlist'
 import algo1 from './algo1'
 import algo2 from './algo2'
 import algo3 from './algo3'
+import createBigStats from './bigStats'
 
 const AlgoContainer = ({ guesses, algo, withPosition }) => {
   const charStatuses = getStatuses(guesses)
   const [word, setWord] = useState('')
   useEffect(() => {
     const filteredWords = words
-      .filter(word => word.every(letter => charStatuses[letter] !== 'absent'))  // Filter words containing absent letters
-      .filter(word => {
+      .filter((word) =>
+        word.every((letter) => charStatuses[letter] !== 'absent')
+      ) // Filter words containing absent letters
+      .filter((word) => {
         for (const [char, status] of Object.entries(charStatuses)) {
           if (status === 'present' && !word.includes(char)) {
             return false
@@ -21,9 +23,9 @@ const AlgoContainer = ({ guesses, algo, withPosition }) => {
         }
         return true
       }) // Filter words not containing present letter
-      .filter(word => {
+      .filter((word) => {
         let shouldKeep = true
-        guesses.forEach(guess => {
+        guesses.forEach((guess) => {
           const guessStatuses = getGuessStatuses(guess)
           guessStatuses.forEach((guessStatus, index) => {
             if (guessStatus === 'correct' && guess[index] !== word[index]) {
@@ -38,23 +40,28 @@ const AlgoContainer = ({ guesses, algo, withPosition }) => {
         })
         return shouldKeep
       }) // Filter words not having correct character at correct place, or having present letter incorrect place
-    const stats = createLetterFrequencyObject(filteredWords, CHAR_VALUES, withPosition)
-    setWord(algo(filteredWords, stats));
-  }, [charStatuses])
-  return <div className='text-sm text-gray-500 dark:text-gray-300'>{word}</div>
+    const stats = createLetterFrequencyObject(filteredWords, withPosition)
+    setWord(algo(filteredWords, stats))
+  }, [charStatuses, algo, guesses, withPosition])
+  return <div className="text-sm text-gray-500 dark:text-gray-300">{word}</div>
 }
 
-const createLetterFrequencyObject = (words, chars, withPosition) => {
+const createLetterFrequencyObject = (words, withPosition) => {
   const stat = {}
-  chars.forEach((char) => {
-    let count;
+  CHAR_VALUES.forEach((char) => {
+    let count
     if (withPosition) {
-      count = words.reduce((counter, word) => {
-        return word.map((letter, index) => letter === char ? counter[index] + 1 : counter[index])
-      }, [0, 0, 0, 0, 0])
+      count = words.reduce(
+        (counter, word) => {
+          return word.map((letter, index) =>
+            letter === char ? counter[index] + 1 : counter[index]
+          )
+        },
+        [0, 0, 0, 0, 0]
+      )
     } else {
       count = words.reduce((counter, word) => {
-        return counter + word.filter(letter => letter === char).length
+        return counter + word.filter((letter) => letter === char).length
       }, 0)
     }
     stat[char] = count
@@ -63,7 +70,9 @@ const createLetterFrequencyObject = (words, chars, withPosition) => {
 }
 
 const Algo1 = ({ guesses }) => <AlgoContainer guesses={guesses} algo={algo1} />
-const Algo2 = ({ guesses }) => <AlgoContainer guesses={guesses} algo={algo2} withPosition />
+const Algo2 = ({ guesses }) => (
+  <AlgoContainer guesses={guesses} algo={algo2} withPosition />
+)
 const Algo3 = ({ guesses }) => <AlgoContainer guesses={guesses} algo={algo3} />
 
-export { Algo1, Algo2, Algo3 }
+export { Algo1, Algo2, Algo3, createBigStats, createLetterFrequencyObject }

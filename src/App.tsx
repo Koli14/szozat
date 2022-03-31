@@ -46,7 +46,8 @@ import { DOUBLE_LETTERS } from './lib/hungarianWordUtils'
 import { getPuzzleName } from './lib/share'
 
 import { Algo1, Algo2, Algo3 } from './components/algorithms'
-
+import createBigStats from './components/algorithms/bigStats'
+import AlgoStats from './components/algorithms/AlgoStats'
 import './App.css'
 
 function App() {
@@ -359,6 +360,18 @@ function App() {
     window.location.reload()
   }
 
+  const [samples, setSamples] = useState(10)
+  const [isLoading, setLoading] = useState(false)
+  const [algoStats, setAlgoStats] = useState({})
+  const createStats = () => {
+    setLoading(true)
+    setTimeout(() => {
+      setAlgoStats(createBigStats(samples))
+      setLoading(false)
+      console.log(algoStats)
+    }, 1)
+  }
+
   return (
     <>
       <Alert message={NOT_ENOUGH_LETTERS_MESSAGE} isOpen={isNotEnoughLetters} />
@@ -470,7 +483,7 @@ function App() {
                     className="text-m grow font-bold dark:text-white"
                     title="Karakter poziciónként pontozza a szavakat"
                   >
-                    Legvalószínűbb szó
+                    Legzöldebb szó
                   </h2>
                   <Algo2 guesses={guesses} />
                 </div>
@@ -490,6 +503,60 @@ function App() {
               >
                 Előlről kezdem
               </button>
+              <div className="text-sm text-gray-500 dark:text-gray-300">
+                Statisztikák generálása:
+                <form className="w-full max-w-sm">
+                  <div className="md:flex md:items-center mb-6">
+                    <div className="md:w-1/3">
+                      <label
+                        className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                        htmlFor="inline-full-name"
+                      >
+                        Minták száma
+                      </label>
+                    </div>
+                    <div className="md:w-2/3">
+                      <input
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        id="inline-full-name"
+                        type="number"
+                        value={samples}
+                        onChange={(event) => {
+                          setSamples(Number(event.target.value))
+                        }}
+                      />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <button
+                className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-10 rounded-lg flex items-center justify-center sm:w-fit p-2 dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
+                onClick={createStats}
+              >
+                {isLoading && (
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                )}
+                Generáld
+              </button>
             </div>
           </div>
           <div className="pb-2">
@@ -501,6 +568,9 @@ function App() {
               isRevealing={isRevealing}
             />
           </div>
+        </div>
+        <div>
+          <AlgoStats algoStats={algoStats} />
         </div>
       </div>
     </>
